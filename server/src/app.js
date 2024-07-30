@@ -16,7 +16,9 @@ app.use(express.urlencoded({ extended: true, limit: '16kb' }))
 app.use(express.static('public'))
 app.use(cookieParser())
 
-//routers
+//routes
 import userRoutes from './routes/user.routes.js'
+import taskRoutes from './routes/task.routes.js'
 app.use('/api/v1/users', userRoutes)
+app.use('/api/v1/tasks', taskRoutes)
 export default app

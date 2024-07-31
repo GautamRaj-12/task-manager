@@ -21,9 +21,9 @@ const generateAccessAndRefreshToken = async (userId) => {
 }
 
 const signUpUser = asyncHandler(async (req, res) => {
-  const { email, password } = req.body
-  if (!email && !password) {
-    throw new ApiError(400, 'Email and Password both are required')
+  const { fullName, email, password } = req.body
+  if (!fullName && !email && !password) {
+    throw new ApiError(400, 'Full Namme, Email and Password all are required')
   }
   if (password.length < 6 || password.length > 60) {
     throw new ApiError(400, 'Password should be between 6 and 60 characters')
@@ -33,7 +33,7 @@ const signUpUser = asyncHandler(async (req, res) => {
   if (existingUser) {
     throw new ApiError(409, 'User already exists')
   }
-  const createdUser = await User.create({ email, password })
+  const createdUser = await User.create({ fullName, email, password })
 
   if (!createdUser) {
     throw new ApiError(500, 'Some error occurred while registering!!!!!!')
